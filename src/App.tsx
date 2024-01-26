@@ -1,24 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Modal,
+  Box,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Container,
+} from "@mui/material";
+import { ChatWindow } from "./chat/ChatWindow";
+import NavBar from "./navigation/NavBar";
+import {
+  styled,
+  alpha,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material/styles";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#0061ff",
+    },
+  },
+});
 
 function App() {
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedModel, setSelectedModel] = useState("gpt3.5-turbo");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="text-white" style={{ backgroundColor: "#343541" }}>
+      <NavBar
+        selectedModel={selectedModel}
+        setSelectedModel={setSelectedModel}
+      />
+      <ChatWindow />
     </div>
   );
 }
